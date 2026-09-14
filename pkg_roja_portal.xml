@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="package" method="upgrade">
+  <name>ROJA Portal Package</name>
+  <packagename>roja_portal</packagename>
+  <version>2.2.0</version>
+  <creationDate>September 2026</creationDate>
+  <author>ROJA Portal</author>
+  <description>ROJA Portal standalone template and editorial modules.</description>
+  <files folder="constituents">
+    <file type="template" id="roja_portal" client="site">tpl_roja_portal.zip</file>
+    <file type="module" id="mod_roja_hero" client="site">mod_roja_hero.zip</file>
+    <file type="module" id="mod_roja_breaking" client="site">mod_roja_breaking.zip</file>
+    <file type="module" id="mod_roja_trending" client="site">mod_roja_trending.zip</file>
+    <file type="module" id="mod_roja_newsgrid" client="site">mod_roja_newsgrid.zip</file>
+  </files>
+</extension>
