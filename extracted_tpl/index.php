@@ -42,6 +42,37 @@ if ($isHome && !empty($defaultQuery)) {
 $wa->registerAndUseStyle('roja.portal', 'media/templates/site/roja_portal/css/template.css', ['version' => 'auto']);
 $wa->registerAndUseScript('roja.portal', 'media/templates/site/roja_portal/js/template.js', ['version' => 'auto'], ['defer' => true]);
 
+$now = Factory::getDate('now', Factory::getConfig()->get('offset'));
+$dayNames = [
+    Text::_('TPL_ROJA_DAY_1'),
+    Text::_('TPL_ROJA_DAY_2'),
+    Text::_('TPL_ROJA_DAY_3'),
+    Text::_('TPL_ROJA_DAY_4'),
+    Text::_('TPL_ROJA_DAY_5'),
+    Text::_('TPL_ROJA_DAY_6'),
+    Text::_('TPL_ROJA_DAY_7'),
+];
+$monthNames = [
+    '',
+    Text::_('TPL_ROJA_MONTH_1'),
+    Text::_('TPL_ROJA_MONTH_2'),
+    Text::_('TPL_ROJA_MONTH_3'),
+    Text::_('TPL_ROJA_MONTH_4'),
+    Text::_('TPL_ROJA_MONTH_5'),
+    Text::_('TPL_ROJA_MONTH_6'),
+    Text::_('TPL_ROJA_MONTH_7'),
+    Text::_('TPL_ROJA_MONTH_8'),
+    Text::_('TPL_ROJA_MONTH_9'),
+    Text::_('TPL_ROJA_MONTH_10'),
+    Text::_('TPL_ROJA_MONTH_11'),
+    Text::_('TPL_ROJA_MONTH_12'),
+];
+$headerDay = $dayNames[(int) $now->format('N') - 1];
+$headerMonth = $monthNames[(int) $now->format('n')];
+$headerDate = $headerDay . ', ' . $now->format('d') . ' ' . $headerMonth . ' ' . $now->format('Y');
+$headerTime = $now->format('H:i');
+$headerTimezone = $now->format('T');
+
 $sitename = htmlspecialchars((string) $app->get('sitename'), ENT_QUOTES, 'UTF-8');
 $title = htmlspecialchars((string) $this->params->get('siteTitle', $sitename), ENT_QUOTES, 'UTF-8');
 $tagline = htmlspecialchars((string) $this->params->get('siteDescription', ''), ENT_QUOTES, 'UTF-8');
@@ -68,8 +99,8 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
   <jdoc:include type="scripts" />
   <style>:root{--rp-accent:<?php echo $accent; ?>}</style>
 </head>
-<body id="top" class="rp-site <?php echo $isHome ? 'is-home ' : ''; ?><?php echo htmlspecialchars($option . ' view-' . $view, ENT_QUOTES, 'UTF-8'); ?>">
-  <a class="rp-skip" href="#rp-main">Lewati ke konten</a>
+<body id="top" class="rp-site <?php echo $isHome ? 'is-home ' : ''; ?><?php echo htmlspecialchars($option . ' view-' . $view, ENT_QUOTES, 'UTF-8'); ?>" data-rp-breaking-label="<?php echo htmlspecialchars(Text::_('TPL_ROJA_BREAKING_LABEL'), ENT_QUOTES, 'UTF-8'); ?>">
+  <a class="rp-skip" href="#rp-main"><?php echo Text::_('TPL_ROJA_SKIP_CONTENT'); ?></a>
 
   <?php if ($this->countModules('topbar', true)) : ?>
     <div class="rp-topbar"><div class="rp-shell"><jdoc:include type="modules" name="topbar" style="none" /></div></div>
@@ -77,7 +108,7 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
 
   <header class="rp-header<?php echo $sticky; ?>">
     <div class="rp-shell rp-masthead">
-      <button class="rp-menu-toggle" type="button" aria-label="Buka menu" aria-controls="rp-navigation" aria-expanded="false">
+      <button class="rp-menu-toggle" type="button" aria-label="<?php echo Text::_('TPL_ROJA_OPEN_MENU'); ?>" aria-controls="rp-navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <a class="rp-brand" href="<?php echo $this->baseurl; ?>/" aria-label="<?php echo $sitename; ?>">
@@ -86,21 +117,15 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
       </a>
       <div class="rp-tools">
         <div class="rp-header-meta" aria-live="polite">
-          <span class="rp-date"><?php
-            $dayNames = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
-            $monthNames = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-            $day = $dayNames[(int) date('N') - 1];
-            $month = $monthNames[(int) date('n')];
-            echo $day . ', ' . date('d') . ' ' . $month . ' ' . date('Y');
-          ?></span>
-          <span class="rp-time"><?php echo date('H:i'); ?> WIB</span>
+          <span class="rp-date"><?php echo htmlspecialchars($headerDate, ENT_QUOTES, 'UTF-8'); ?></span>
+          <span class="rp-time"><?php echo htmlspecialchars($headerTime . ($headerTimezone ? ' ' . $headerTimezone : ''), ENT_QUOTES, 'UTF-8'); ?></span>
         </div>
         <jdoc:include type="modules" name="header-tools" style="none" />
         <div class="rp-search"><jdoc:include type="modules" name="search" style="none" /></div>
       </div>
     </div>
-    <div class="rp-navbar" id="rp-navigation" aria-label="Navigasi utama">
-      <button class="rp-menu-close" type="button" aria-label="Tutup menu">Tutup <span aria-hidden="true">×</span></button>
+    <div class="rp-navbar" id="rp-navigation" aria-label="<?php echo Text::_('TPL_ROJA_MAIN_NAVIGATION'); ?>">
+      <button class="rp-menu-close" type="button" aria-label="<?php echo Text::_('TPL_ROJA_CLOSE_MENU'); ?>"><?php echo Text::_('TPL_ROJA_CLOSE_MENU'); ?> <span aria-hidden="true">×</span></button>
       <div class="rp-mobile-search"></div>
       <div class="rp-shell"><jdoc:include type="modules" name="menu" style="none" /></div>
     </div>
@@ -160,10 +185,10 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
       <div><jdoc:include type="modules" name="footer-menu-2" style="none" /></div>
       <div><jdoc:include type="modules" name="footer-social" style="none" /></div>
     </div>
-    <div class="rp-footer-bottom"><div class="rp-shell"><jdoc:include type="modules" name="footer-bottom" style="none" /><span>© <?php echo date('Y'); ?> <?php echo $sitename; ?></span></div></div>
+    <div class="rp-footer-bottom"><div class="rp-shell"><jdoc:include type="modules" name="footer-bottom" style="none" /><span>© <?php echo $now->format('Y'); ?> <?php echo $sitename; ?></span></div></div>
   </footer>
 
-  <?php if ($this->params->get('backTop', 1)) : ?><a class="rp-backtop" href="#top" aria-label="Kembali ke atas">↑</a><?php endif; ?>
+  <?php if ($this->params->get('backTop', 1)) : ?><a class="rp-backtop" href="#top" aria-label="<?php echo Text::_('TPL_ROJA_BACK_TO_TOP'); ?>">↑</a><?php endif; ?>
   <div class="rp-nav-overlay" hidden></div>
   <jdoc:include type="modules" name="debug" style="none" />
 </body>

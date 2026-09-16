@@ -1,9 +1,12 @@
 (() => {
   'use strict';
+  const breakingLabel = document.body.dataset.rpBreakingLabel;
   document.querySelectorAll('.roja-breaking').forEach(list => {
     list.tabIndex = 0;
     list.setAttribute('role', 'region');
-    list.setAttribute('aria-label', 'Berita terkini, geser untuk melihat berita berikutnya');
+    if (breakingLabel) {
+      list.setAttribute('aria-label', breakingLabel);
+    }
   });
   const button = document.querySelector('.rp-menu-toggle');
   const nav = document.getElementById('rp-navigation');

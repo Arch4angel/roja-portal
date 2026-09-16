@@ -13,6 +13,7 @@
     <filename>offline.php</filename>
     <filename>templateDetails.xml</filename>
     <folder>html</folder>
+    <folder>language</folder>
   </files>
   <media destination="templates/site/roja_portal" folder="media">
     <folder>css</folder>
@@ -51,19 +52,19 @@
   </positions>
   <config>
     <fields name="params">
-      <fieldset name="brand" label="Brand &amp; Layout">
-        <field name="logoFile" type="media" relative="true" default="" label="Logo" />
-        <field name="siteTitle" type="text" default="ROJA PORTAL" label="Site title" filter="string" />
-        <field name="siteDescription" type="text" default="Berita • Edukasi • Kopi • Teknologi" label="Tagline" filter="string" />
-        <field name="accent" type="color" default="#c62026" label="Accent color" />
-        <field name="stickyHeader" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="Sticky header"><option value="0">JNO</option><option value="1">JYES</option></field>
-        <field name="homeComponent" type="radio" layout="joomla.form.field.radio.switcher" default="0" label="Show main component on homepage"><option value="0">JNO</option><option value="1">JYES</option></field>
-        <field name="backTop" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="Back to top"><option value="0">JNO</option><option value="1">JYES</option></field>
+      <fieldset name="brand" label="TPL_ROJA_BRAND_LAYOUT">
+        <field name="logoFile" type="media" relative="true" default="" label="TPL_ROJA_LOGO" />
+        <field name="siteTitle" type="text" default="ROJA PORTAL" label="TPL_ROJA_SITE_TITLE" filter="string" />
+        <field name="siteDescription" type="text" default="Berita • Edukasi • Kopi • Teknologi" label="TPL_ROJA_TAGLINE" filter="string" />
+        <field name="accent" type="color" default="#c62026" label="TPL_ROJA_ACCENT_COLOR" />
+        <field name="stickyHeader" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="TPL_ROJA_STICKY_HEADER"><option value="0">JNO</option><option value="1">JYES</option></field>
+        <field name="homeComponent" type="radio" layout="joomla.form.field.radio.switcher" default="0" label="TPL_ROJA_HOME_COMPONENT"><option value="0">JNO</option><option value="1">JYES</option></field>
+        <field name="backTop" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="TPL_ROJA_BACK_TO_TOP"><option value="0">JNO</option><option value="1">JYES</option></field>
       </fieldset>
-      <fieldset name="comments" label="Komentar artikel">
-        <field name="commentsEnabled" type="radio" layout="joomla.form.field.radio.switcher" default="0" label="Aktifkan komentar Disqus" description="Sebelum mengaktifkan: daftarkan situs di Disqus, isi shortname, atur Pre-moderation = All dan matikan Guest Commenting di Disqus Admin. Moderasi dilakukan di Disqus."><option value="0">JNO</option><option value="1">JYES</option></field>
-        <field name="disqusShortname" type="text" default="" label="Disqus shortname" filter="string" maxlength="63" description="Isi shortname situs milik Anda, bukan URL atau alamat email. Contoh: nama-portal. Komentar hanya ditampilkan pada artikel Published dengan akses Public dan kategori Public." />
-        <field name="commentsHeading" type="text" default="Diskusi pembaca" label="Judul kolom komentar" filter="string" maxlength="120" />
+      <fieldset name="comments" label="TPL_ROJA_ARTICLE_COMMENTS">
+        <field name="commentsEnabled" type="radio" layout="joomla.form.field.radio.switcher" default="0" label="TPL_ROJA_ENABLE_DISQUS" description="TPL_ROJA_DISQUS_ENABLE_DESC"><option value="0">JNO</option><option value="1">JYES</option></field>
+        <field name="disqusShortname" type="text" default="" label="TPL_ROJA_DISQUS_SHORTNAME" filter="string" maxlength="63" description="TPL_ROJA_DISQUS_SHORTNAME_DESC" />
+        <field name="commentsHeading" type="text" default="" label="TPL_ROJA_COMMENTS_HEADING_LABEL" filter="string" maxlength="120" />
       </fieldset>
     </fields>
   </config>

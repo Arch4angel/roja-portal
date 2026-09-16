@@ -2,6 +2,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Router\Route;
+use Joomla\CMS\Language\Text;
 use Joomla\Component\Content\Site\Helper\RouteHelper;
 
 final class RojaPortalComments
@@ -39,7 +40,8 @@ final class RojaPortalComments
             (string) ($article->language ?? '*')
         ), false, Route::TLS_IGNORE, true);
         $escape = static fn ($text): string => htmlspecialchars((string) $text, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-        $heading = trim((string) $settings->get('commentsHeading', 'Diskusi pembaca')) ?: 'Diskusi pembaca';
+        $defaultHeading = Text::_('TPL_ROJA_COMMENTS_HEADING');
+        $heading = trim((string) $settings->get('commentsHeading', $defaultHeading)) ?: $defaultHeading;
         $app->getDocument()->getWebAssetManager()->registerAndUseScript(
             'roja.comments', 'media/templates/site/roja_portal/js/comments.js',
             ['version' => 'auto'], ['defer' => true]
@@ -50,11 +52,11 @@ final class RojaPortalComments
             . ' data-identifier="joomla-article-' . (int) $article->id . '"'
             . ' data-url="' . $escape($url) . '" data-title="' . $escape($article->title) . '">'
             . '<h2 id="rp-comments-title">' . $escape($heading) . '</h2>'
-            . '<p class="rp-comments-intro">Bagikan pendapat Anda. Masuk melalui Disqus dengan akun sosial atau email.</p>'
-            . '<button type="button" class="rp-button rp-comments-load" aria-controls="disqus_thread">Tampilkan komentar</button>'
+            . '<p class="rp-comments-intro">' . $escape(Text::_('TPL_ROJA_COMMENTS_INTRO')) . '</p>'
+            . '<button type="button" class="rp-button rp-comments-load" aria-controls="disqus_thread">' . $escape(Text::_('TPL_ROJA_SHOW_COMMENTS')) . '</button>'
             . '<p class="rp-comments-status" role="status" aria-live="polite"></p>'
             . '<div id="disqus_thread"></div>'
-            . '<noscript>Aktifkan JavaScript untuk membaca dan menulis komentar.</noscript>'
+            . '<noscript>' . $escape(Text::_('TPL_ROJA_COMMENTS_NOSCRIPT')) . '</noscript>'
             . '</section>';
     }
 }
